@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Encryption
+{% endblock %}
+
+{% block main %}
+    <div class="section text-center">
+        <form action="/encipher" method="post">
+            <h2>ENCRYPTION</h2>
+            <p>
+                Enter any data that you want to encrypt
+            </p>
+            <div id="data" class="mb-3">
+                <input type="text" name="plaintext" id="plaintext" autocomplete="off">
+            </div>
+          <button type="submit" class="btn btn-primary">Encrypt</button>
+        </form>
+        <div id="key">key: {{txt}}</div>
+    </div>
+{% endblock %}
