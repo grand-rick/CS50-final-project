@@ -5,8 +5,9 @@ from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
 from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
+from random import random
 
-from helpers import apology, login_required, usd
+from helpers import apology, login_required, usd, cipher, decipher, randomNumberGenerator
 
 # Configure application
 app = Flask(__name__)
@@ -45,6 +46,22 @@ def after_request(response):
 @login_required
 def index():
     """Show portfolio of stocks"""
+    # print("\t\t\tGRAND RICK PRODUCTIONS.")
+    # print("Hello there, type 'e' to encrypt or 'd' to decrypt.")
+    # while True:
+    #     user_input = input("What would you like to do? ").strip()
+    #     if user_input == "e":
+    #         text = input("Enter data to encrypt: ").strip()
+    #         results = encipher(text)
+    #         print("Your encrypted data is %s "%(results[0]))
+    #         print("Your decryption key is %d "%(results[1]))
+    #         break
+    #     elif user_input == "d":
+    #         text = input("Enter data to decrypt: ").strip()
+    #         d_key = int(input("Enter the encryption key: ").strip())
+    #         plainText = decipher(text, d_key)
+    #         print("Your decrypted data is %s "%(plainText))
+    #         break
     return render_template("index.html")
 
 # HISTORY
