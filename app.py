@@ -7,7 +7,7 @@ from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
 from random import random
 
-from helpers import apology, login_required, usd, cipher, decipher, randomNumberGenerator
+from helpers import apology, login_required, usd, cipher, decipher, randomNumberGenerator, listToString, decryptionKey
 
 # Configure application
 app = Flask(__name__)
