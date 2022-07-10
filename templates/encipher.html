@@ -6,16 +6,42 @@
 
 {% block main %}
     <div class="section text-center">
-        <form action="/encipher" method="post">
-            <h2>ENCRYPTION</h2>
-            <p>
-                Enter any data that you want to encrypt
-            </p>
-            <div id="data" class="mb-3">
-                <input type="text" name="plaintext" id="plaintext" autocomplete="off">
-            </div>
-          <button type="submit" class="btn btn-primary">Encrypt</button>
-        </form>
-        <div id="key">key: {{txt}}</div>
+        <table class="table">
+            <thead>
+                <th>
+                    <h2>
+                        Enter any data that you want to encrypt
+                    </h2>
+                </th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <form action="/encrypt" method="post">
+            
+                            <div id="data" class="mb-3">
+                                <input type="text" name="plaintext" id="plaintext" autocomplete="off">
+                            </div>
+                          <button type="submit" class="btn btn-primary">Encrypt</button>
+                        </form>
+                    </td>
+                </tr>
+                {% if not txt %}
+                {% else %}
+                <tr>
+                    <td>Encrypted Data: <input type="text" id="encData" value="{{txt[0]}}"></td>
+                    <td>
+                        <button class="btn btn-primary" onclick="copyEncryptedData()">Copy Text</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Decryption key: <input type="text" id="d_key" value="{{txt[1]}}"></td>
+                    <td>
+                        <button class="btn btn-primary" onclick="copyDecryptionKey()">Copy Text</button>
+                    </td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
     </div>
 {% endblock %}

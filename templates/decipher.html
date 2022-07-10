@@ -6,19 +6,29 @@
 
 {% block main %}
     <div class="section text-center">
-        <form action="/decipher" method="post">
-            <h2>DECRYPTION</h2>
-            <p>
-                Enter the data that you want to decrypt
-            </p>
-            <div id="cipherText" class="mb-3">
-                <label for="key">Decryption key: </label>
-                <input type="text" name="key" id="key" autocomplete="off"> <br>
-                <label for="ciphertext">Encrypted data: </label>
-                <input type="text" name="ciphertext" id="ciphertext">
-            </div>
-          <button type="submit" class="btn btn-primary">Decrypt</button>
-        </form>
-        <div id="plainText"></div>
+        <h2>
+            Enter the data that you want to decrypt
+        </h2>
+        <div class="form mb-3">
+            <form action="/decrypt" method="post">
+                <div id="cipherText" class="mb-3">
+                    <label for="ciphertext">Encrypted data: </label>
+                    <input type="text" name="ciphertext" id="ciphertext" autocomplete="off" autofocus>
+                </div>
+                <div id="decryptionKey" class="mb-3">
+                    <label for="key">Decryption key: </label>
+                    <input type="text" name="key" id="key">
+                </div>
+                <button type="submit" class="btn btn-primary">Decrypt</button>
+            </form>
+        </div>
+        
+        {% if not txt %}
+        {% else %}
+        <div class="decryptedData">
+            <span id="d_Data">Decrypted Data</span>: <input type="text" id="decryptedData" value="{{txt}}">
+            <button class="btn btn-primary" onclick="copyDecryptedData()">Copy Text</button>
+        </div>
+        {% endif %}
     </div>
 {% endblock %}

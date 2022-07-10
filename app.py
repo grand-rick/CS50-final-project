@@ -7,7 +7,7 @@ from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
 from random import random
 
-from helpers import apology, login_required, usd, cipher, decipher, randomNumberGenerator, listToString, decryptionKey
+from helpers import apology, login_required, usd, randomNumberGenerator, listToString, decryptionKey, encipher, decipher
 
 # Configure application
 app = Flask(__name__)
@@ -45,47 +45,36 @@ def after_request(response):
 @app.route("/")
 @login_required
 def index():
-    """Show portfolio of stocks"""
-    # print("\t\t\tGRAND RICK PRODUCTIONS.")
-    # print("Hello there, type 'e' to encrypt or 'd' to decrypt.")
-    # while True:
-    #     user_input = input("What would you like to do? ").strip()
-    #     if user_input == "e":
-    #         text = input("Enter data to encrypt: ").strip()
-    #         results = encipher(text)
-    #         print("Your encrypted data is %s "%(results[0]))
-    #         print("Your decryption key is %d "%(results[1]))
-    #         break
-    #     elif user_input == "d":
-    #         text = input("Enter data to decrypt: ").strip()
-    #         d_key = int(input("Enter the encryption key: ").strip())
-    #         plainText = decipher(text, d_key)
-    #         print("Your decrypted data is %s "%(plainText))
-    #         break
     return render_template("index.html")
 
 # HISTORY
 
 
-@app.route("/encipher", methods=["GET", "POST"])
+@app.route("/encrypt", methods=["GET", "POST"])
 # @login_required
-def encipher():
+def encrypt():
     if request.method == "POST":
-        plaintext = request.form.get("plaintext")
-        return render_template("encipher.html", txt=plaintext)
+        text = request.form.get("plaintext").strip()
+        text = str(text)
+        cipher_data = encipher(text)
+        cipher_data[1] = listToString(cipher_data[1])
+        return render_template("encipher.html", txt=cipher_data)
     else:
         return render_template("encipher.html")
 
 # QUOTE
 
 
-@app.route("/decipher", methods=["GET", "POST"])
+@app.route("/decrypt", methods=["GET", "POST"])
 # @login_required
-def decipher():
+def decrypt():
     if request.method == "POST":
-        ciphertext = request.form.get("ciphertext")
-        key = request.form.get("key")
-    return render_template("decipher.html")
+        cipherText = request.form.get("ciphertext")
+        d_key = request.form.get("key")
+        plainText = decipher(cipherText, d_key)
+        return render_template("decipher.html", txt=plainText)
+    else:
+        return render_template("decipher.html")
 
 # STORE DATA
 
@@ -193,5 +182,5 @@ def register():
     else:
         return render_template("register.html")
 
-
-
+if __name__ == "__main__":
+    app.run(debug=True)

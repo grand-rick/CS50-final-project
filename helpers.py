@@ -75,6 +75,7 @@ def decipher(cipherText, d_key):
     :param d_key: The decryption key
     :return: The decrypted text.
     """
+    d_num = 90
     
     # Getting the fourth character in the decryption key and subtracting 90 from it.
     for i in range(len(d_key)):
@@ -118,6 +119,8 @@ def randomNumberGenerator():
     return num
 
 def decryptionKey(key):
+    # Global variable d_num
+    d_num = 90
     """
     It generates 10 random numbers, adds 90 to them, converts them to characters, and then inserts the
     key into the fourth character
