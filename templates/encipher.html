@@ -29,13 +29,13 @@
                 {% if not txt %}
                 {% else %}
                 <tr>
-                    <td>Encrypted Data: <input type="text" id="encData" value="{{txt[0]}}"></td>
+                    <td>Encrypted Data: <input type="text" id="encData" value={{txt[0]}}></td>
                     <td>
                         <button class="btn btn-primary" onclick="copyEncryptedData()">Copy Text</button>
                     </td>
                 </tr>
                 <tr>
-                    <td>Decryption key: <input type="text" id="d_key" value="{{txt[1]}}"></td>
+                    <td>Decryption key: <input type="text" id="d_key" value={{txt[1]}}></td>
                     <td>
                         <button class="btn btn-primary" onclick="copyDecryptionKey()">Copy Text</button>
                     </td>
