@@ -76,13 +76,6 @@ def decrypt():
     else:
         return render_template("decipher.html")
 
-# STORE DATA
-
-
-@app.route("/store", methods=["GET", "POST"])
-@login_required
-def store():
-    return render_template("store.html")
 # LOGIN
 
 
