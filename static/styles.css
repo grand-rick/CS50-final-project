@@ -75,6 +75,11 @@ tbody tr:nth-of-type(odd) {
 textarea {
     resize:vertical;
 }
+
+#data {
+    text-align: left;
+    font-size: 150%;
+}
 /*tr.sell {*/
 /*    background-color: #DC281E;*/
 /*}*/
