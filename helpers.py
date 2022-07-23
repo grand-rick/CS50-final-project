@@ -6,7 +6,6 @@ from flask import redirect, render_template, request, session
 from functools import wraps
 from random import randint, shuffle, random
 
-
 def apology(message, code=400):
     """Render message as an apology to user."""
     def escape(s):
@@ -39,7 +38,7 @@ def encipher(text):
     """
     It takes a string, and returns a list of two strings, the first being the encrypted string, and the
     second being the decryption key.
-    
+
     :param text: The text to be encrypted
     :return: A list of the encrypted text and the decryption key.
     """
@@ -57,7 +56,9 @@ def encipher(text):
             tmp = (tmp + key) % 26
             tmp += ord("a")
         else:
-            tmp += key
+            tmp -= 32 # SPACE BAR
+            tmp = (tmp + key) % 33
+            tmp += 32
         char = chr(tmp)
         newText += char
     values.append(newText)
@@ -70,18 +71,18 @@ def decipher(cipherText, d_key):
     The function takes the ciphertext and the decryption key as parameters. It then uses the fourth
     character in the decryption key to determine the decryption key. It then uses list comprehension to
     iterate through the ciphertext and decrypt it.
-    
+
     :param cipherText: The text that is to be decrypted
     :param d_key: The decryption key
     :return: The decrypted text.
     """
     d_num = 90
-    
+
     # Getting the fourth character in the decryption key and subtracting 90 from it.
     for i in range(len(d_key)):
         if i == 3:
             d_key = (ord(d_key[i]) - d_num)
-    
+
     # Using list comprehension and join
     newText = ""
     for character in cipherText:
@@ -99,7 +100,11 @@ def decipher(cipherText, d_key):
             if tmp < 0:
                 tmp += 26
         else:
-            tmp -= d_key
+            tmp -= 32 # SPACE BAR
+            tmp = (tmp - d_key) % 33
+            tmp += 32
+            if tmp < 0:
+                tmp += 33
         newText += chr(tmp)
 
     return newText
@@ -124,7 +129,7 @@ def decryptionKey(key):
     """
     It generates 10 random numbers, adds 90 to them, converts them to characters, and then inserts the
     key into the fourth character
-    
+
     :param key: The key that the user inputs
     :return: A list of 10 characters
     """
@@ -160,11 +165,11 @@ def decryptionKey(key):
 
 # Function to convert a list to a string
 def listToString(s):
-   
+
     # initialize an empty string
     str1 = ""
-    
-    # return string 
+
+    # return string
     return (str1.join(s))
 
 def usd(value):
