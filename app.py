@@ -58,6 +58,7 @@ def encrypt():
         text = str(text)
         cipher_data = encipher(text)
         cipher_data[1] = listToString(cipher_data[1])
+        db.execute("INSERT INTO cipherData (user_id, cipher_text, d_key) VALUES(?, ?, ?)", session["user_id"], cipher_data[0], cipher_data[1])
         return render_template("encipher.html", txt=cipher_data)
     else:
         return render_template("encipher.html")
@@ -74,7 +75,10 @@ def decrypt():
         plainText = decipher(cipherText, d_key)
         return render_template("decipher.html", txt=plainText)
     else:
-        return render_template("decipher.html")
+        user_id = session["user_id"]
+        cipher_data = db.execute("SELECT cipher_text, d_key FROM cipherData WHERE user_id = ?", user_id)
+        cipher_data = cipher_data[0]["d_key"]
+        return render_template("decipher.html", data=cipher_data)
 
 # LOGIN
 

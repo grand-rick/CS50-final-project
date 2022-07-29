@@ -87,3 +87,8 @@ textarea {
 /*tr.buy {*/
 /*    background-color: #56ab2f;*/
 /*}*/
+
+.summaryText {
+    font-size: 130%;
+    color:blue;
+}

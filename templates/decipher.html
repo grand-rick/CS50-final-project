@@ -5,6 +5,35 @@
 {% endblock %}
 
 {% block main %}
+  <div id="table">
+    <details>
+        <summary>
+            <span class="summaryText">Your Last 5 Encryptions</span>
+        </summary>
+        <table class="table">
+            <thead>
+                <th>Encrypted Data</th>
+                <th>Decryption Key</th>
+            </thead>
+            <tbody>
+                <!-- {% for data in cipher_data %} -->
+                    <tr>
+                        <td>
+                            <input type="text" id="encData" value="{{ data }}">
+                            <button class="btn btn-primary" onclick="copyEncryptedData()">Copy Text</button>
+                        </td>
+                        <td>
+                            <input type="text" id="d_key" value="{{ data }}">
+                            <button class="btn btn-primary" onclick="copyDecryptionKey()">Copy Text</button>
+                        </td>
+                    </tr>
+                <!-- {% endfor %} -->
+            </tbody>
+        </table>
+    </details>
+    
+  </div>
+  </div>
     <div class="section text-center">
         <h2>
             Enter the data that you want to decrypt
