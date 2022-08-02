@@ -51,7 +51,7 @@ def index():
 
 
 @app.route("/encrypt", methods=["GET", "POST"])
-# @login_required
+@login_required
 def encrypt():
     if request.method == "POST":
         text = request.form.get("plaintext").strip()
@@ -67,18 +67,27 @@ def encrypt():
 
 
 @app.route("/decrypt", methods=["GET", "POST"])
-# @login_required
+@login_required
 def decrypt():
+    user_id = session["user_id"]
+    cipher_data = db.execute("SELECT id, cipher_text, d_key FROM cipherData WHERE user_id = ? ORDER BY id DESC LIMIT 5", user_id)
     if request.method == "POST":
         cipherText = request.form.get("ciphertext")
         d_key = request.form.get("key")
         plainText = decipher(cipherText, d_key)
-        return render_template("decipher.html", txt=plainText)
+        return render_template("decipher.html", txt=plainText, cipher_data=cipher_data)
     else:
-        user_id = session["user_id"]
-        cipher_data = db.execute("SELECT cipher_text, d_key FROM cipherData WHERE user_id = ?", user_id)
-        cipher_data = cipher_data[0]["d_key"]
-        return render_template("decipher.html", data=cipher_data)
+        return render_template("decipher.html", cipher_data=cipher_data)
+
+
+@app.route("/delete", methods=["POST"])
+@login_required
+def delete():
+    id = request.form.get("data_id")
+    user_id = session["user_id"]
+    db.execute("DELETE FROM cipherData WHERE id = ? AND user_id = ?", id, user_id)
+    return redirect("/decrypt")
+
 
 # LOGIN
 

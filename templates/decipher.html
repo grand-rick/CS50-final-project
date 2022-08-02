@@ -14,20 +14,27 @@
             <thead>
                 <th>Encrypted Data</th>
                 <th>Decryption Key</th>
+                <th></th>
             </thead>
             <tbody>
-                <!-- {% for data in cipher_data %} -->
+                {% for data in cipher_data %}
                     <tr>
                         <td>
-                            <input type="text" id="encData" value="{{ data }}">
+                            <input type="text" id="encData" value="{{ data['cipher_text'] }}">
                             <button class="btn btn-primary" onclick="copyEncryptedData()">Copy Text</button>
                         </td>
                         <td>
-                            <input type="text" id="d_key" value="{{ data }}">
+                            <input type="text" id="d_key" value="{{ data['d_key'] }}">
                             <button class="btn btn-primary" onclick="copyDecryptionKey()">Copy Text</button>
                         </td>
+                        <td>
+                            <form action="/delete" method="post">
+                                <input type="hidden" name="data_id" value="{{ data['id'] }}">
+                                <button type="submit" class="btn btn-primary">Delete</button>
+                            </form>
+                        </td>
                     </tr>
-                <!-- {% endfor %} -->
+                {% endfor %}
             </tbody>
         </table>
     </details>
