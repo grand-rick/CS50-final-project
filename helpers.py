@@ -6,6 +6,10 @@ from flask import redirect, render_template, request, session
 from functools import wraps
 from random import randint, shuffle, random
 
+# Global variables
+symbols1 = "{|~}"
+symbols2 = "[\]^_`"
+
 def apology(message, code=400):
     """Render message as an apology to user."""
     def escape(s):
@@ -55,6 +59,14 @@ def encipher(text):
             tmp -= ord("a")
             tmp = (tmp + key) % 26
             tmp += ord("a")
+        elif character in symbols1:
+            tmp -= 123 # {
+            tmp = (tmp + key) % 4
+            tmp += 123
+        elif character in symbols2:
+            tmp -= 91 # [
+            tmp = (tmp + key) % 6
+            tmp += 91
         else:
             tmp -= 32 # SPACE BAR
             tmp = (tmp + key) % 33
@@ -99,6 +111,18 @@ def decipher(cipherText, d_key):
             tmp += ord("a")
             if tmp < 0:
                 tmp += 26
+        elif character in symbols1:
+            tmp -= 123 # {
+            tmp = (tmp - d_key) % 4
+            tmp += 123
+            if tmp < 0:
+                tmp += 4
+        elif character in symbols2:
+            tmp -= 91 # [
+            tmp = (tmp - d_key) % 6
+            tmp += 91
+            if tmp < 0:
+                tmp += 6
         else:
             tmp -= 32 # SPACE BAR
             tmp = (tmp - d_key) % 33

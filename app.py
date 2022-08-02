@@ -30,6 +30,9 @@ db = SQL("sqlite:///cipher.db")
 # if not os.environ.get("API_KEY"):
 #     raise RuntimeError("API_KEY not set")
 
+# Global variables
+symbols1 = "{|~}"
+symbols2 = "[\]^_`"
 
 @app.after_request
 def after_request(response):

@@ -59,8 +59,12 @@ if (alertTrigger) {
   })
 }
 
-const box = document.getElementById('box');
+// const box = document.getElementById('box');
 
-box.addEventListener('mousemove', (e) => {
-    box.style.backgroundColor = "rgb("+e.offsetX+", "+e.offsetY+", 80)"
-})
+// box.addEventListener('mousemove', (e) => {
+//     box.style.backgroundColor = "rgb("+e.offsetX+", 80, "+e.offsetY+")"
+// })
+
+party.confetti(runButton, {
+    count: party.variation.range(20, 40)
+});
