@@ -55,7 +55,7 @@ const alertUser = (message, type) => {
 const alertTrigger = document.getElementById('liveAlertBtn')
 if (alertTrigger) {
   alertTrigger.addEventListener('click', () => {
-    alertUser('Your Encrypted Data and Decryption key is automatically saved, check decryption page for more details.', 'success')
+    alertUser('Your Encrypted Data and Decryption key are automatically saved, check decryption page for more details.', 'success')
   })
 }
 

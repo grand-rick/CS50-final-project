@@ -20,12 +20,10 @@
                 {% for data in cipher_data %}
                     <tr>
                         <td>
-                            <input type="text" id="encData" value="{{ data['cipher_text'] }}">
-                            <button class="btn btn-primary" onclick="copyEncryptedData()">Copy Text</button>
+                            <code>{{data['cipher_text']}}</code>
                         </td>
                         <td>
-                            <input type="text" id="d_key" value="{{ data['d_key'] }}">
-                            <button class="btn btn-primary" onclick="copyDecryptionKey()">Copy Text</button>
+                            <code>{{data['d_key']}}</code>
                         </td>
                         <td>
                             <form action="/delete" method="post">

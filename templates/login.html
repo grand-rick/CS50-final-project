@@ -12,10 +12,10 @@
         <form action="/login" method="post">
             <h1 class="mb-5">Welcome to my Cipher app</h1>
             <div class="mb-3">
-                <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="username" name="username" placeholder="Username" type="text">
+                <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="username" name="username" placeholder="Username" type="text" required>
             </div>
             <div class="mb-3">
-                <input class="form-control mx-auto w-auto" id="password" name="password" placeholder="Password" type="password">
+                <input class="form-control mx-auto w-auto" id="password" name="password" placeholder="Password" type="password" required>
             </div>
             <button class="btn btn-primary" type="submit" onmousedown="party.confetti(this)">Log In</button>
         </form>
