@@ -73,10 +73,20 @@ def encrypt():
 @login_required
 def decrypt():
     user_id = session["user_id"]
+    valid_keys = []
     cipher_data = db.execute("SELECT id, cipher_text, d_key FROM cipherData WHERE user_id = ? ORDER BY id DESC LIMIT 5", user_id)
     if request.method == "POST":
         cipherText = request.form.get("ciphertext")
         d_key = request.form.get("key")
+
+        # This is to ensure that the user is only able to decrypt the ciphertexts that they have
+        # encrypted.
+        db_keys = db.execute("SELECT d_key FROM cipherData WHERE user_id = ?", user_id)
+        for key in db_keys:
+            valid_keys.append(key['d_key'])
+        if not d_key in valid_keys:
+            return apology("Invalid decryption key")
+
         plainText = decipher(cipherText, d_key)
         return render_template("decipher.html", txt=plainText, cipher_data=cipher_data)
     else:
