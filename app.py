@@ -115,20 +115,20 @@ def login():
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
-        # Ensure username was submitted
-        if not request.form.get("username"):
-            return apology("must provide username", 403)
+        # Ensure email was submitted
+        if not request.form.get("email"):
+            return apology("must provide email", 403)
 
         # Ensure password was submitted
         elif not request.form.get("password"):
             return apology("must provide password", 403)
 
         # Query database for username
-        rows = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
+        rows = db.execute("SELECT * FROM users WHERE email = ?", request.form.get("email"))
 
-        # Ensure username exists and password is correct
+        # Ensure email exists and password is correct
         if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
-            return apology("invalid username and/or password", 403)
+            return apology("invalid email and/or password", 403)
 
         # Remember which user has logged in
         session["user_id"] = rows[0]["id"]
@@ -160,9 +160,19 @@ def logout():
 def register():
     """Register user"""
     if request.method == "POST":
+        firstName = request.form.get("firstName")
         username = request.form.get("username")
+        email = request.form.get("email")
         password = request.form.get("password")
         confirmation = request.form.get("confirmation")
+
+        # Ensuring the fields are not blank
+        if not firstName:
+            return apology("Missing First Name")
+        
+        # Ensuring the fields are not blank
+        if not email:
+            return apology("Missing email");
 
         # Ensuring the fields are not blank
         if not username:
@@ -181,12 +191,12 @@ def register():
             return apology("Password Length must be at least 6 characters long")
 
         # If username is already taken, return error
-        name_check = db.execute("SELECT username FROM users WHERE username = ?", username)
+        email_check = db.execute("SELECT email FROM users WHERE email = ?", email)
 
-        if not name_check:
+        if not email_check:
             # Encrypt the password
             wordpass = generate_password_hash(password)
-            db.execute("INSERT INTO users (username, hash) VALUES(?, ?)", username, wordpass)
+            db.execute("INSERT INTO users (firstName, username, email, hash) VALUES(?, ?, ?, ?)", firstName, username, email, wordpass)
 
             # Query database for username
             rows = db.execute("SELECT * FROM users WHERE username = ?", username)
@@ -197,7 +207,7 @@ def register():
             # Redirect user to home page
             return redirect("/")
         else:
-            return apology("Username already taken, please try another one")
+            return apology("Email already taken, please try another one")
     else:
         return render_template("register.html")
 
