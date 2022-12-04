@@ -91,9 +91,8 @@ def decipher(cipherText, d_key):
     d_num = 90
 
     # Getting the fourth character in the decryption key and subtracting 90 from it.
-    for i in range(len(d_key)):
-        if i == 3:
-            d_key = (ord(d_key[i]) - d_num)
+    d_key = (ord(d_key[3]) - d_num)
+    
 
     # Using list comprehension and join
     newText = ""

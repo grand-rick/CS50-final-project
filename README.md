@@ -18,13 +18,13 @@ ___
 | `.html` files   | are files that are rendered and displayed by the app |
 
 ---
-> To run the program, in two ways:
+> To run the program, run these commands on your terminal
 1. To run it in a development server
-```python
+```bash
     flask run
 ```
 2. To run it in a production server
-```python
+```bash
     python3 app.py
 ```
 
@@ -50,8 +50,23 @@ When the user heads to the encryption page, it renders the `encipher.html` file,
 When the user enters their data and clicks the button to encrypt, the following processes occur:
 
 1. The data is retrieved using the `POST` method and stored in a variable as a string.
-2. It is then [encrypted](https:// "Click to read the encryption logic") to generate the cipher text and decryption key.
+2. It is then encrypted as illustrated below, to generate the cipher text and decryption key.
 3. The cipher text and the decryption key are then stored in the database.
+
+#### **THE ENCRYPTION LOGIC**
+---
+For the encryption, the algorithm is essentially a more complex innovation of the caesar cipher.
+
+First of all, the program generates a random number between -32 and 36. If the number is even, it is negated. The number should fall within these bounds because when the first(a) and last(z) alphabets are added respectively with the upper and lower limits of the generated numbers, they will still be within the range of useable ASCII values. 
+
+The random number then becomes the key. The program then shifts all characters of the plain text forwards by the key against the alphabet, to generate the cipher text.
+
+Next, the key is encrypted using the following steps. 
+* First, 8 random numbers are generated in the same way as stated before. The numbers have 90 added to them so that they can fall within the category of useable ASCII values.
+* They algorithm ensures that no number is the same as the previous one. 
+* The numbers are then converted to their respective ASCII values, with the fourth character being reassigned as the key.
+
+The program then returns a list with the cipher text as the first element and the decryption key as the second.
 
 >After encrypting, a new interface pops up that gives more details for the next step. A live alert emerges, informing the user that the encrypted data and decryption key are stored in the database, and that they should check the decryption page for more details.
 
@@ -70,7 +85,16 @@ In this page, the app renders a simple interface that shows:
 When the user enters the cipher data and clicks the button to decrypt, 5 main processes occur:
 
 1. The cipher text and decryption key are fetched using the `POST` method stored in variables as strings.
-2. The sets of cipher data are then [decrypted](https:// "Click to read the decryption process") to get the plain text that is then displayed.
+2. The sets of cipher data are then decrypted as explained below, to get the plain text that is then displayed.
+
+#### **THE DECRYPTION LOGIC**
+---
+
+For the decryption, I've written a function that takes the cipher text and the decryption key as parameters. It then takes the fourth character of the decryption key, converts it back to a number and subtracts 90 from it to get the key.
+
+Using that key, the function iterates over all the characters of the cipher text, shifting their position backwards against the alphabet to get the plain text.
+
+The function then returns the plain text as a string.
 
 ![Decryption Page- decrypting](./static/images/dec2.gif)
 ![Decryption Page- result](./static/images/dec3.gif)
