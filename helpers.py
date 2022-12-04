@@ -151,7 +151,7 @@ def decryptionKey(key):
     # Global variable d_num
     d_num = 90
     """
-    It generates 10 random numbers, adds 90 to them, converts them to characters, and then inserts the
+    It generates 8 random numbers, adds 90 to them, converts them to characters, and then inserts the
     key into the fourth character
 
     :param key: The key that the user inputs
@@ -162,7 +162,7 @@ def decryptionKey(key):
     random_characters = []
     random = randomNumberGenerator()
 
-    # Getting 10 random numbers and adding 90 to them for later character conversion
+    # Getting 8 random numbers and adding 90 to them for later character conversion
     for i in range(SIZE):
         copy = random
         flag = 1
@@ -175,7 +175,7 @@ def decryptionKey(key):
             else:
                 random = randomNumberGenerator()
 
-    # Converting the 10 random numbers to characters
+    # Converting the 8 random numbers to characters
     for i in range(SIZE):
         if i == 3:
             # Reassigning the fourth character as the key
