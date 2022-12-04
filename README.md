@@ -12,6 +12,7 @@ ___
 | templates folder| contains template (`.html`) files that are rendered  |
 | flask_session and \__pycache\__ | collaborate to manage login sessions |
 | app.py          | contains the logic for running the web app           |
+| appa.py         | used in the debugging process                        |
 | cipher.db       | databases that stores data as required               |
 | helpers.py      | contains helper functions that are used in `app.py`  |
 | requirements.txt| contains all the project dependencies used           | |
