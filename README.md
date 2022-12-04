@@ -47,13 +47,34 @@ After successfully logging in, the user is directed to te homepage. This page gi
 When the user heads to the encryption page, it renders the `encipher.html` file, which is simple and straight to the point.
 ![Encryption Page](./static/images/enc.gif "Encryption Page")
 
-When the user enters their data and clicks the button to encrypt, 5 main processes occur. 
+When the user enters their data and clicks the button to encrypt, the following processes occur:
 
 1. The data is retrieved using the `POST` method and stored in a variable as a string.
-2. It is then encrypted using the caesar cipher by use of a random key.
-3. The characters are shifted forwards in the ASCII table, by the random key to become cipher text.
-4. The random key is then encrypted into an eight-character ASCII text with the key within., now referred to as the decryption key.
-5. The cipher text and the decryption key are then stored in the database.
+2. It is then [encrypted](https:// "Click to read the encryption logic") to generate the cipher text and decryption key.
+3. The cipher text and the decryption key are then stored in the database.
 
 >After encrypting, a new interface pops up that gives more details for the next step. A live alert emerges, informing the user that the encrypted data and decryption key are stored in the database, and that they should check the decryption page for more details.
 
+![Encrypted Data and Decryption Key](./static/images/enc1.gif "Encrypted data and decryption key")
+
+### Phase 4 - **Decryption Page**
+After the user gotten the cipher data (*Encryption key and Decryption key*), the desired result can be retrieved from the decryption page.
+In this page, the app renders a simple interface that shows:
+
+* Two input fields for receiving the cipher data.
+* Last 5 sets of cipher data that were stored, in order of the most recent.
+
+![Decryption Page- default](./static/images/dec.gif)
+![Decryption Page- stored](./static/images/dec1.gif)
+
+When the user enters the cipher data and clicks the button to decrypt, 5 main processes occur:
+
+1. The cipher text and decryption key are fetched using the `POST` method stored in variables as strings.
+2. The sets of cipher data are then [decrypted](https:// "Click to read the decryption process") to get the plain text that is then displayed.
+
+![Decryption Page- decrypting](./static/images/dec2.gif)
+![Decryption Page- result](./static/images/dec3.gif)
+
+## Conclusion
+---
+The project revolved around juggling both the frontend and backend areas of a website. This is in turn boosted my understanding of the web space and narrowed my preferences (frontend or backend) when it comes to web development. All in all, I really enjoyed this wholesome experience and hyped to learn even more with the CS50's courses.
