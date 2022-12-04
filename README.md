@@ -8,13 +8,13 @@ ___
 
 |**File / Folder**| Functionality                                        |
 | :---------------| :--------------------------------------------------- |
-| static folder   | Contains a css, javascript and favicon files         |
+| static folder   |Contains a css, javascript, images and favicon files             |
 | templates folder| contains template (`.html`) files that are rendered  |
 | flask_session and \__pycache\__ | collaborate to manage login sessions |
 | app.py          | contains the logic for running the web app           |
 | cipher.db       | databases that stores data as required               |
 | helpers.py      | contains helper functions that are used in `app.py`  |
-| requirements.txt| contains all the project dependencies used           |
+| requirements.txt| contains all the project dependencies used           | |
 | `.html` files   | are files that are rendered and displayed by the app |
 
 ---
@@ -45,4 +45,4 @@ After successfully logging in, the user is directed to te homepage. This page gi
 
 ### Phase 3 -- **Encryption Page**
 When the user heads to the encryption page, it renders the `encipher.html` file, which is simple and straight to the point.
-![Encryption Page](https://drive.google.com/file/d/1FCOGsQOhX90DE35csHSKoPUvdgCGnTFG/view?usp=sharing "Encryption Page")
+![Encryption Page](https://github.com/grand-rick001/CS50-final-project/blob/master/static/images/enc.gif "Encryption Page")
